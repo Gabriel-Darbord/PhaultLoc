@@ -10,13 +10,11 @@ BaselineOfPhaultLoc >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		spec
-			package: 'PhaultLoc'
-			with: [ spec requires: #( 'CodeCoverage' ) ].
+		spec package: 'PhaultLoc' with: [ spec requires: #( 'Coverage' ) ].
 
 		spec
-			baseline: 'CodeCoverage'
-			with: [ spec repository: 'github://alamvic/CodeCoverage:main/src' ].
+			baseline: 'Coverage'
+			with: [ spec repository: 'github://Alamvic/coverage:main/src' ].
 
 		spec
 			group: 'core' with: #( 'PhaultLoc' );
