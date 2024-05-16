@@ -12,7 +12,9 @@ This enables the calculation of statement coverage metrics such as [Ochiai](http
 The more suspicious a statement is, the more likely it is to be the cause of a failed test.
 
 ```st
-coverage := PLStatementCoverage statementCoverageOfMethods: MyClass methods withTests: MyClassTest suite tests.
+coverage := PLStatementCoverage
+               statementCoverageOfMethods: MyClass methods
+               withTests: MyClassTest suite tests.
 ochiai := PLStatementCoverage sortByTarantulaScore: coverage.
 tarantula := PLStatementCoverage sortByOchiaiScore: coverage.
 ```
