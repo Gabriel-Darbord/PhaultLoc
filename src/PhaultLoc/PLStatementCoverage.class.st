@@ -109,10 +109,10 @@ PLStatementCoverage >> executedPasses: aTestCollection [
 { #category : 'initialization' }
 PLStatementCoverage >> initialize [
 
-	executedPasses := OrderedCollection new.
-	executedFails := OrderedCollection new.
-	nonExecutedPasses := OrderedCollection new.
-	nonExecutedFails := OrderedCollection new
+	executedPasses := OrderedCollection new: 0.
+	executedFails := OrderedCollection new: 0.
+	nonExecutedPasses := OrderedCollection new: 0.
+	nonExecutedFails := OrderedCollection new: 0
 ]
 
 { #category : 'accessing' }
