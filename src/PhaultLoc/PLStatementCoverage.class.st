@@ -35,26 +35,29 @@ PLStatementCoverage class >> statementCoverageOfMethods: methods withTests: test
 	| coverages |
 	coverages := Dictionary new.
 	methods do: [ :method |
+		| statements |
+		statements := method ast allSequenceNodes flatCollect: [ :s |
+			              Array with: s withAll: s statements ].
 		tests do: [ :test |
 			| rawCoverages result |
 			rawCoverages := LineCoverage
 				                measureCoverageOfMethods: { method }
 				                during: [ result := test run ].
-			(method ast allSequenceNodes flatCollect: [ :s |
-				 Array with: s withAll: s statements ])
+			statements
 				with: (rawCoverages coverageOf: method)
 				do: [ :statement :rawCoverage |
-					| coverage |
+					| coverage testMethod |
 					coverage := coverages at: statement ifAbsentPut: [ self new ].
+					testMethod := test class >> test selector.
 					rawCoverage
 						ifNotNil: [ "statement has been executed"
 							result hasPassed
-								ifTrue: [ coverage addExecutedPass: test asString ]
-								ifFalse: [ coverage addExecutedFail: test asString ] ]
+								ifTrue: [ coverage addExecutedPass: testMethod ]
+								ifFalse: [ coverage addExecutedFail: testMethod ] ]
 						ifNil: [ "statement not executed"
 							result hasPassed
-								ifTrue: [ coverage addNonExecutedPass: test asString ]
-								ifFalse: [ coverage addNonExecutedFail: test asString ] ] ] ] ].
+								ifTrue: [ coverage addNonExecutedPass: testMethod ]
+								ifFalse: [ coverage addNonExecutedFail: testMethod ] ] ] ] ].
 	^ coverages
 ]
 
