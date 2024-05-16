@@ -163,7 +163,7 @@ PLStatementCoverage >> printOn: stream [
 		nextPutAll: ',np:';
 		nextPutAll: nonExecutedPasses size asString;
 		nextPutAll: ',nf:';
-		nextPutAll: nonExecutedPasses size asString;
+		nextPutAll: nonExecutedFails size asString;
 		nextPut: $]
 ]
 
